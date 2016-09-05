@@ -1,14 +1,22 @@
 package com.github.transitbot.updatehandlers;
 
+import com.github.transitbot.api.RoutesService;
+import com.github.transitbot.api.models.Route;
 import com.github.transitbot.commands.HelpCommand;
 import com.github.transitbot.commands.StartCommand;
 import com.github.transitbot.utils.ConfigReader;
 import com.github.transitbot.utils.Emoji;
+import com.github.transitbot.utils.TemplateUtility;
 import org.telegram.telegrambots.TelegramApiException;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.logging.BotLogger;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -47,6 +55,25 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
 
     @Override
     public void processNonCommandUpdate(Update update) {
+        try {
+            Message message = update.getMessage();
+            if (message != null && message.hasText()) {
+                if (validateStopNumber(message.getText())) {
+                    RoutesService service = new RoutesService();
+                    List<Route> routes = service.getRoutesByStopNumber(message.getText());
+                    SendMessage sendMessage = new SendMessage();
+                    sendMessage.setChatId(message.getChatId().toString());
+                    TemplateUtility templateUtility = new TemplateUtility();
+                    sendMessage.setText(templateUtility.renderTemplate("route.ftlh", "routes", routes));
+                    sendMessage(sendMessage);
+                } else {
+                    handleWrongMessage(message);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -58,5 +85,34 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
     @Override
     public String getBotToken() {
         return ConfigReader.getPropValues().getProperty("bot.token");
+    }
+
+    /**
+     * validate if string has only stop number.
+     *
+     * @param string text
+     * @return true or false
+     */
+    private boolean validateStopNumber(String string) {
+        String pattern = "^[0-9]{5}$";
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(string);
+        return matcher.matches();
+    }
+
+    /**
+     * handels wrong message.
+     *
+     * @param message I don't understand you
+     */
+    private void handleWrongMessage(Message message) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(message.getChatId().toString());
+        sendMessage.setText("I don't understand you " + Emoji.UNAMUSED_FACE);
+        try {
+            sendMessage(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 }

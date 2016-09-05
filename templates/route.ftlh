@@ -1,4 +1,4 @@
 Routes available on this stop:
-<#--% for message in messages:-->
-${route.routeName}" - coverage: "${route.routeCoverage}
-<#--% endfor-->
+<#list routes as route>
+${route.routeName?no_esc} - coverage: ${route.routeCoverage?no_esc}
+</#list>

@@ -16,7 +16,7 @@ public class RequestSender {
     /**
      * static method to send request.
      *
-     * @param path represents path of url
+     * @param path   represents path of url
      * @param params url parameters Map<String, Object>
      * @return HttpResponse object. Json object can be retrieved from it
      */

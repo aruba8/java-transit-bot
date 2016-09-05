@@ -12,15 +12,18 @@ public class Route {
 
     /**
      * route coverage.
-     *
      */
     private String routeCoverage;
 
     /**
+     * Route number.
+     */
+    private String routeNumber;
+
+    /**
      * constructor to create bean.
      *
-     * @param routeName routeName
-     *
+     * @param routeName     routeName
      * @param routeCoverage routeCoverage
      */
     public Route(String routeName, String routeCoverage) {
@@ -69,5 +72,23 @@ public class Route {
      */
     public void setRouteCoverage(String routeCoverage) {
         this.routeCoverage = routeCoverage;
+    }
+
+    /**
+     * getter.
+     *
+     * @return routeNumber
+     */
+    public String getRouteNumber() {
+        return routeNumber;
+    }
+
+    /**
+     * setter.
+     *
+     * @param routeNumber routeNumber
+     */
+    public void setRouteNumber(String routeNumber) {
+        this.routeNumber = routeNumber;
     }
 }
