@@ -1,7 +1,7 @@
 package com.github.transitbot.updatehandlers;
 
-import com.github.transitbot.api.RoutesService;
-import com.github.transitbot.api.models.Route;
+import com.github.transitbot.api.models.BusSchedule;
+import com.github.transitbot.api.services.BusScheduleService;
 import com.github.transitbot.commands.HelpCommand;
 import com.github.transitbot.commands.StartCommand;
 import com.github.transitbot.utils.ConfigReader;
@@ -28,6 +28,11 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
      * tag for logs.
      */
     private static final String LOGTAG = "COMMANDSHANDLER";
+
+    /**
+     * amount of schedules in list.
+     */
+    private int amountOfSchedulesInList = 5;
 
 
     /**
@@ -59,12 +64,17 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
             Message message = update.getMessage();
             if (message != null && message.hasText()) {
                 if (validateStopNumber(message.getText())) {
-                    RoutesService service = new RoutesService();
-                    List<Route> routes = service.getRoutesByStopNumber(message.getText());
+                    BusScheduleService service = new BusScheduleService();
+                    List<BusSchedule> busSchedules = service.getBusSchedulesByStopNumber(message.getText());
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setChatId(message.getChatId().toString());
                     TemplateUtility templateUtility = new TemplateUtility();
-                    sendMessage.setText(templateUtility.renderTemplate("route.ftlh", "routes", routes));
+
+                    if (busSchedules.size() < amountOfSchedulesInList) {
+                        amountOfSchedulesInList = busSchedules.size();
+                    }
+                    sendMessage.setText(templateUtility.renderTemplate(
+                            "schedule.ftlh", "busses", busSchedules.subList(0, amountOfSchedulesInList)));
                     sendMessage(sendMessage);
                 } else {
                     handleWrongMessage(message);

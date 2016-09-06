@@ -1,4 +1,4 @@
-package com.github.transitbot.api;
+package com.github.transitbot.api.services;
 
 import com.github.transitbot.api.models.Route;
 import com.github.transitbot.utils.RequestSender;
