@@ -32,7 +32,12 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
     /**
      * amount of schedules in list.
      */
-    private int amountOfSchedulesInList = 5;
+    private final int amountOfSchedulesInList = 5;
+
+    /**
+     * to keep message state.
+     */
+    private Message sentMessage;
 
 
     /**
@@ -64,27 +69,14 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
             Message message = update.getMessage();
             if (message != null && message.hasText()) {
                 if (validateStopNumber(message.getText())) {
-                    BusScheduleService service = new BusScheduleService();
-                    List<BusSchedule> busSchedules = service.getBusSchedulesByStopNumber(message.getText());
-                    SendMessage sendMessage = new SendMessage();
-                    sendMessage.setChatId(message.getChatId().toString());
-                    TemplateUtility templateUtility = new TemplateUtility();
-
-                    if (busSchedules.size() < amountOfSchedulesInList) {
-                        amountOfSchedulesInList = busSchedules.size();
-                    }
-                    sendMessage.setText(templateUtility.renderTemplate(
-                            "schedule.ftlh", "busses", busSchedules.subList(0, amountOfSchedulesInList)));
-                    sendMessage(sendMessage);
+                    showSchedule(message);
                 } else {
                     handleWrongMessage(message);
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -111,7 +103,7 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
     }
 
     /**
-     * handels wrong message.
+     * handles wrong message.
      *
      * @param message I don't understand you
      */
@@ -124,5 +116,27 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * shows schedule of stop.
+     *
+     * @param message message
+     * @throws TelegramApiException TelegramApiException
+     */
+    private void showSchedule(Message message) throws TelegramApiException {
+        BusScheduleService service = new BusScheduleService();
+        List<BusSchedule> busSchedules = service.getBusSchedulesByStopNumber(message.getText());
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(message.getChatId().toString());
+        TemplateUtility templateUtility = new TemplateUtility();
+        int normalAmountOfschedules = amountOfSchedulesInList;
+        if (busSchedules.size() < amountOfSchedulesInList) {
+            normalAmountOfschedules = busSchedules.size();
+        }
+        sendMessage.setText(templateUtility.renderTemplate(
+                "schedule.ftlh", "busses", busSchedules.subList(0, normalAmountOfschedules)));
+        sentMessage = sendMessage(sendMessage);
+
     }
 }
