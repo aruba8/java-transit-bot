@@ -1,7 +1,9 @@
 package com.github.transitbot.updatehandlers;
 
 import com.github.transitbot.api.models.BusSchedule;
+import com.github.transitbot.api.models.Route;
 import com.github.transitbot.api.services.BusScheduleService;
+import com.github.transitbot.api.services.RoutesService;
 import com.github.transitbot.commands.HelpCommand;
 import com.github.transitbot.commands.StartCommand;
 import com.github.transitbot.utils.ConfigReader;
@@ -9,11 +11,16 @@ import com.github.transitbot.utils.Emoji;
 import com.github.transitbot.utils.TemplateUtility;
 import org.telegram.telegrambots.TelegramApiException;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.api.objects.CallbackQuery;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.bots.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.logging.BotLogger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,11 +74,26 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
     public void processNonCommandUpdate(Update update) {
         try {
             Message message = update.getMessage();
-            if (message != null && message.hasText()) {
+            CallbackQuery callbackQuery = update.getCallbackQuery();
+            if (callbackQuery == null && message != null && message.hasText()) {
                 if (validateStopNumber(message.getText())) {
-                    showSchedule(message);
+                    showAnswerOnStopNumber(message);
                 } else {
                     handleWrongMessage(message);
+                }
+            } else {
+                String callBackData = callbackQuery.getData();
+                String[] callBackDataArray = callBackData.split(":");
+                String callbackButtonCode = callBackDataArray[0];
+                String stopNumber = callBackDataArray[1];
+                switch (callbackButtonCode) {
+                    case "1":
+                        showInfo(callbackQuery, stopNumber);
+                        break;
+                    case "2":
+                        showSchedule(callbackQuery, stopNumber);
+                        break;
+                    default:
                 }
             }
         } catch (Exception e) {
@@ -121,22 +143,90 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
     /**
      * shows schedule of stop.
      *
-     * @param message message
+     * @param callbackQuery callbackQuery
+     * @param stopNumber    stopNumber
      * @throws TelegramApiException TelegramApiException
      */
-    private void showSchedule(Message message) throws TelegramApiException {
+    private void showSchedule(CallbackQuery callbackQuery, String stopNumber) throws TelegramApiException {
+        InlineKeyboardMarkup keyboard = createKeyboard(stopNumber);
+        Message message = callbackQuery.getMessage();
+        String chatId = message.getChatId().toString();
+        EditMessageText editMessageText = new EditMessageText();
+        editMessageText.setChatId(chatId);
+        editMessageText.setMessageId(message.getMessageId());
         BusScheduleService service = new BusScheduleService();
-        List<BusSchedule> busSchedules = service.getBusSchedulesByStopNumber(message.getText());
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(message.getChatId().toString());
+        List<BusSchedule> busSchedules = service.getBusSchedulesByStopNumber(stopNumber);
         TemplateUtility templateUtility = new TemplateUtility();
         int normalAmountOfschedules = amountOfSchedulesInList;
         if (busSchedules.size() < amountOfSchedulesInList) {
             normalAmountOfschedules = busSchedules.size();
         }
-        sendMessage.setText(templateUtility.renderTemplate(
+        editMessageText.setText(templateUtility.renderTemplate(
                 "schedule.ftlh", "busses", busSchedules.subList(0, normalAmountOfschedules)));
-        sentMessage = sendMessage(sendMessage);
+        editMessageText.setReplyMarkup(keyboard);
+        editMessageText.enableMarkdown(true);
+        sentMessage = editMessageText(editMessageText);
 
+    }
+
+    /**
+     * show info about stop.
+     *
+     * @param callbackQuery callbackQuery
+     * @param stopNumber    stopNumber
+     * @throws TelegramApiException TelegramApiException
+     */
+    private void showInfo(CallbackQuery callbackQuery, String stopNumber) throws TelegramApiException {
+        InlineKeyboardMarkup keyboard = createKeyboard(stopNumber);
+        Message message = callbackQuery.getMessage();
+        String chatId = message.getChatId().toString();
+        EditMessageText editMessageText = new EditMessageText();
+        editMessageText.setChatId(chatId);
+        editMessageText.setMessageId(message.getMessageId());
+        RoutesService service = new RoutesService();
+        List<Route> routeList = service.getRoutesByStopNumber(stopNumber);
+        TemplateUtility templateUtility = new TemplateUtility();
+        editMessageText.setText(templateUtility.renderTemplate(
+                "route.ftlh", "routes", routeList));
+        editMessageText.setReplyMarkup(keyboard);
+        editMessageText.enableMarkdown(true);
+        sentMessage = editMessageText(editMessageText);
+    }
+
+    /**
+     * initial answer on stop number.
+     *
+     * @param message message
+     * @throws TelegramApiException TelegramApiException
+     */
+    private void showAnswerOnStopNumber(Message message) throws TelegramApiException {
+        InlineKeyboardMarkup keyboard = createKeyboard(message.getText());
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setText("Stop #" + message.getText());
+        sendMessage.setReplyMarkup(keyboard);
+        sendMessage.enableMarkdown(true);
+        sendMessage.setChatId(message.getChatId().toString());
+        sendMessage(sendMessage);
+    }
+
+    /**
+     * Create inline keyboard.
+     *
+     * @param stopNumber stopNumber
+     * @return InlineKeyboardMarkup InlineKeyboardMarkup
+     */
+    private InlineKeyboardMarkup createKeyboard(String stopNumber) {
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyBoard = new ArrayList<>();
+        List<InlineKeyboardButton> internalKeyboard = new ArrayList<>();
+        InlineKeyboardButton infoButton = new InlineKeyboardButton();
+        InlineKeyboardButton scheduleButton = new InlineKeyboardButton();
+        infoButton.setText("Info").setCallbackData("1:" + stopNumber);
+        scheduleButton.setText("Schedule").setCallbackData("2:" + stopNumber);
+        internalKeyboard.add(infoButton);
+        internalKeyboard.add(scheduleButton);
+        keyBoard.add(internalKeyboard);
+        markup.setKeyboard(keyBoard);
+        return markup;
     }
 }
