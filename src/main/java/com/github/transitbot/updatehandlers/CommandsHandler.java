@@ -21,7 +21,9 @@ import org.telegram.telegrambots.bots.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.logging.BotLogger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,12 +42,6 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
      * amount of schedules in list.
      */
     private final int amountOfSchedulesInList = 5;
-
-    /**
-     * to keep message state.
-     */
-    private Message sentMessage;
-
 
     /**
      * Constructor.
@@ -81,7 +77,7 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
                 } else {
                     handleWrongMessage(message);
                 }
-            } else {
+            } else if (callbackQuery != null) {
                 String callBackData = callbackQuery.getData();
                 String[] callBackDataArray = callBackData.split(":");
                 String callbackButtonCode = callBackDataArray[0];
@@ -161,12 +157,14 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         if (busSchedules.size() < amountOfSchedulesInList) {
             normalAmountOfschedules = busSchedules.size();
         }
+        Map data = new HashMap<>();
+        data.put("busses", busSchedules.subList(0, normalAmountOfschedules));
+        data.put("stopNumber", stopNumber);
         editMessageText.setText(templateUtility.renderTemplate(
-                "schedule.ftlh", "busses", busSchedules.subList(0, normalAmountOfschedules)));
+                "schedule.ftlh", "data", data));
         editMessageText.setReplyMarkup(keyboard);
         editMessageText.enableMarkdown(true);
-        sentMessage = editMessageText(editMessageText);
-
+        editMessageText(editMessageText);
     }
 
     /**
@@ -185,12 +183,15 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         editMessageText.setMessageId(message.getMessageId());
         RoutesService service = new RoutesService();
         List<Route> routeList = service.getRoutesByStopNumber(stopNumber);
+        Map data = new HashMap<>();
+        data.put("routes", routeList);
+        data.put("stopNumber", stopNumber);
         TemplateUtility templateUtility = new TemplateUtility();
         editMessageText.setText(templateUtility.renderTemplate(
-                "route.ftlh", "routes", routeList));
+                "route.ftlh", "data", data));
         editMessageText.setReplyMarkup(keyboard);
         editMessageText.enableMarkdown(true);
-        sentMessage = editMessageText(editMessageText);
+        editMessageText(editMessageText);
     }
 
     /**
@@ -222,7 +223,7 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         InlineKeyboardButton infoButton = new InlineKeyboardButton();
         InlineKeyboardButton scheduleButton = new InlineKeyboardButton();
         infoButton.setText("Info").setCallbackData("1:" + stopNumber);
-        scheduleButton.setText("Schedule").setCallbackData("2:" + stopNumber);
+        scheduleButton.setText("Schedules").setCallbackData("2:" + stopNumber);
         internalKeyboard.add(infoButton);
         internalKeyboard.add(scheduleButton);
         keyBoard.add(internalKeyboard);
