@@ -1,5 +1,6 @@
 package com.github.transitbot.api.services;
 
+import com.github.transitbot.api.services.exceptions.StopNotFoundException;
 import com.github.transitbot.utils.RequestSender;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -28,9 +29,11 @@ public class StopService {
      * @param stopNumber stopNumber
      * @return stop name
      */
-    public String getStopNameByStopNuber(String stopNumber) {
-        return getDataByStopNumber(stopNumber).getBody().getObject().getJSONObject("stop").getString("name");
+    public String getStopNameByStopNumber(String stopNumber) throws StopNotFoundException {
+        HttpResponse<JsonNode> resp = getDataByStopNumber(stopNumber);
+        if (resp == null){
+            throw new StopNotFoundException("Stop "+stopNumber+" not found");
+        }
+        return resp.getBody().getObject().getJSONObject("stop").getString("name");
     }
-
-
 }

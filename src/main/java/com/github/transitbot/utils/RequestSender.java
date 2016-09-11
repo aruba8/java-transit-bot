@@ -27,7 +27,8 @@ public class RequestSender {
         HttpResponse<JsonNode> response = null;
 
         try {
-            response = Unirest.get(apiUrl + path + jsonExtension).queryString(params)
+            response = Unirest.get(apiUrl + path + jsonExtension)
+                    .queryString(params)
                     .queryString("api-key", apiKey).asJson();
         } catch (UnirestException e) {
             e.printStackTrace();

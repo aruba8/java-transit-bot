@@ -4,6 +4,8 @@ import com.github.transitbot.api.models.BusSchedule;
 import com.github.transitbot.api.models.Route;
 import com.github.transitbot.api.services.BusScheduleService;
 import com.github.transitbot.api.services.RoutesService;
+import com.github.transitbot.api.services.StopService;
+import com.github.transitbot.api.services.exceptions.StopNotFoundException;
 import com.github.transitbot.commands.HelpCommand;
 import com.github.transitbot.commands.StartCommand;
 import com.github.transitbot.utils.ConfigReader;
@@ -160,8 +162,8 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         Map data = new HashMap<>();
         data.put("busses", busSchedules.subList(0, normalAmountOfschedules));
         data.put("stopNumber", stopNumber);
-        editMessageText.setText(templateUtility.renderTemplate(
-                "schedule.ftlh", "data", data));
+        String text = templateUtility.renderTemplate("schedule.ftlh", "data", data);
+        editMessageText.setText(text);
         editMessageText.setReplyMarkup(keyboard);
         editMessageText.enableMarkdown(true);
         editMessageText(editMessageText);
@@ -201,11 +203,23 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
      * @throws TelegramApiException TelegramApiException
      */
     private void showAnswerOnStopNumber(Message message) throws TelegramApiException {
-        InlineKeyboardMarkup keyboard = createKeyboard(message.getText());
+        String stopNumber = message.getText();
+        StopService service = new StopService();
+        String stopName = null;
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setText("Stop #" + message.getText());
-        sendMessage.setReplyMarkup(keyboard);
-        sendMessage.enableMarkdown(true);
+        try {
+            stopName = service.getStopNameByStopNumber(stopNumber);
+            InlineKeyboardMarkup keyboard = createKeyboard(stopNumber);
+            sendMessage.setReplyMarkup(keyboard);
+            Map root = new HashMap<>();
+            root.put("stopNumber", stopNumber);
+            root.put("stopName", stopName);
+            TemplateUtility utility = new TemplateUtility();
+            sendMessage.setText(utility.renderTemplate("info.ftlh", "data", root));
+            sendMessage.enableMarkdown(true);
+        } catch (StopNotFoundException e) {
+            sendMessage.setText(e.getMessage());
+        }
         sendMessage.setChatId(message.getChatId().toString());
         sendMessage(sendMessage);
     }
