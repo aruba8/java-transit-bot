@@ -5,6 +5,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.telegram.telegrambots.logging.BotLogger;
 
 import java.util.Map;
 
@@ -12,6 +13,10 @@ import java.util.Map;
  * request sender.
  */
 public class RequestSender {
+    /**
+     * Log tag.
+     */
+    private static final String LOG = RequestSender.class.getName();
 
     /**
      * static method to send request.
@@ -27,9 +32,12 @@ public class RequestSender {
         HttpResponse<JsonNode> response = null;
 
         try {
-            response = Unirest.get(apiUrl + path + jsonExtension)
+            String fullPath = apiUrl + path;
+            response = Unirest.get(fullPath + jsonExtension)
                     .queryString(params)
                     .queryString("api-key", apiKey).asJson();
+            BotLogger.info(LOG, "Sent request: " + fullPath);
+            BotLogger.info(LOG, "Params: " + params);
         } catch (UnirestException e) {
             e.printStackTrace();
         }

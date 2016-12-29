@@ -11,11 +11,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * Service to work with schedule.
@@ -89,7 +85,7 @@ public class BusScheduleService {
      * @param unformattedString unformattedString
      * @return short date
      */
-    public String formatDateTime(String unformattedString) {
+    private String formatDateTime(String unformattedString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
         return LocalDateTime.parse(unformattedString).format(formatter);
     }
