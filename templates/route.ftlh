@@ -1,4 +1,4 @@
-`Stop ${data.stopNumber}`
+`${data.busStopEmoji} ${data.stopNumber}`
 <#list data.routes as route>
-${route.routeName?no_esc} - coverage: ${route.routeCoverage?no_esc}
+${route.routeName?no_esc} - ${data.busEmoji} ${route.routeCoverage?no_esc}
 </#list>

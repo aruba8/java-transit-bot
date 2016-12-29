@@ -162,6 +162,8 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         Map data = new HashMap<>();
         data.put("busses", busSchedules.subList(0, normalAmountOfschedules));
         data.put("stopNumber", stopNumber);
+        data.put("busStopEmoji", Emoji.BUS_STOP);
+        data.put("busEmoji", "" + Emoji.BUS_ONCOMING);
         String text = templateUtility.renderTemplate("schedule.ftlh", "data", data);
         editMessageText.setText(text);
         editMessageText.setReplyMarkup(keyboard);
@@ -188,6 +190,8 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         Map data = new HashMap<>();
         data.put("routes", routeList);
         data.put("stopNumber", stopNumber);
+        data.put("busEmoji", "" + Emoji.BUS);
+        data.put("busStopEmoji", Emoji.BUS_STOP);
         TemplateUtility templateUtility = new TemplateUtility();
         editMessageText.setText(templateUtility.renderTemplate(
                 "route.ftlh", "data", data));

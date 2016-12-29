@@ -102,6 +102,7 @@ public enum Emoji {
     METRO('\uD83D', '\uDE87'),
     STATION('\uD83D', '\uDE89'),
     BUS('\uD83D', '\uDE8C'),
+    BUS_ONCOMING('\uD83D', '\uDE8D'),
     BUS_STOP('\uD83D', '\uDE8F'),
     AMBULANCE('\uD83D', '\uDE91'),
     FIRE_ENGINE('\uD83D', '\uDE92'),
