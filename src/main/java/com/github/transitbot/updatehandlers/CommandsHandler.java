@@ -15,6 +15,7 @@ import org.telegram.telegrambots.TelegramApiException;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.api.objects.CallbackQuery;
+import org.telegram.telegrambots.api.objects.Location;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -72,8 +73,9 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
     public void processNonCommandUpdate(Update update) {
         try {
             Message message = update.getMessage();
+            Location location = message.getLocation();
             CallbackQuery callbackQuery = update.getCallbackQuery();
-            if (callbackQuery == null && message != null && message.hasText()) {
+            if (callbackQuery == null && message.hasText()) {
                 if (validateStopNumber(message.getText())) {
                     showAnswerOnStopNumber(message);
                 } else {
@@ -93,6 +95,9 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
                         break;
                     default:
                 }
+            } else if (location != null) {
+                BotLogger.info(LOGTAG, "Location received. (lon: " + location.getLongitude()
+                        + ", lat: " + location.getLatitude() + ")");
             }
         } catch (Exception e) {
             e.printStackTrace();

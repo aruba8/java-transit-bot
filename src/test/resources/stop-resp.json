@@ -1,0 +1,31 @@
+{
+  "stop": {
+    "number": 10556,
+    "side": "Nearside Opposite",
+    "cross-street": {
+      "name": "Newman Street",
+      "type": "Street",
+      "key": 2619
+    },
+    "street": {
+      "name": "Portage Avenue",
+      "type": "Avenue",
+      "key": 2903
+    },
+    "name": "Westbound Portage at Wall",
+    "centre": {
+      "geographic": {
+        "latitude": "49.88369",
+        "longitude": "-97.18342"
+      },
+      "utm": {
+        "zone": "14U",
+        "x": 630499,
+        "y": 5527281
+      }
+    },
+    "key": 10556,
+    "direction": "Westbound"
+  },
+  "query-time": "2016-12-29T16:23:55"
+}
