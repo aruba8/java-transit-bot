@@ -73,17 +73,23 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
     public void processNonCommandUpdate(Update update) {
         Message message = update.getMessage();
         try {
+
             Location location = null;
-            if (message != null){
-                 location = message.getLocation();
+
+            if (message != null) {
+                location = message.getLocation();
             }
+
             CallbackQuery callbackQuery = update.getCallbackQuery();
+
             if (callbackQuery == null && message.hasText()) {
+
                 if (validateStopNumber(message.getText())) {
                     showAnswerOnStopNumber(message);
                 } else {
                     handleWrongMessage(message);
                 }
+
             } else if (callbackQuery != null) {
                 String callBackData = callbackQuery.getData();
                 String[] callBackDataArray = callBackData.split(":");
