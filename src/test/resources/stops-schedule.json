@@ -1,0 +1,147 @@
+{
+  "stop-schedule": {
+    "stop": {
+      "key": 10064,
+      "name": "Northbound Osborne at Glasgow",
+      "number": 10064,
+      "direction": "Northbound",
+      "side": "Nearside",
+      "street": {
+        "key": 2715,
+        "name": "Osborne Street",
+        "type": "Street"
+      },
+      "cross-street": {
+        "key": 1486,
+        "name": "Glasgow Avenue",
+        "type": "Avenue"
+      },
+      "centre": {
+        "utm": {
+          "zone": "14U",
+          "x": 633838,
+          "y": 5525742
+        },
+        "geographic": {
+          "latitude": "49.86912",
+          "longitude": "-97.1375"
+        }
+      }
+    },
+    "route-schedules": [
+      {
+        "route": {
+          "key": 16,
+          "number": 16,
+          "name": "Route 16 Selkirk-Osborne",
+          "customer-type": "regular",
+          "coverage": "regular"
+        },
+        "scheduled-stops": [
+          {
+            "key": "7787330-23",
+            "times": {
+              "arrival": {
+                "scheduled": "2017-04-09T10:02:36",
+                "estimated": "2017-04-09T10:02:36"
+              },
+              "departure": {
+                "scheduled": "2017-04-09T10:02:36",
+                "estimated": "2017-04-09T10:02:36"
+              }
+            },
+            "variant": {
+              "key": "16-0-M",
+              "name": "Selkirk-Osborne to Tyndall Park via Manitoba"
+            },
+            "bus": {
+              "bike-rack": "false",
+              "easy-access": "true"
+            }
+          },
+          {
+            "key": "7787306-24",
+            "times": {
+              "arrival": {
+                "scheduled": "2017-04-09T10:28:36",
+                "estimated": "2017-04-09T10:28:36"
+              },
+              "departure": {
+                "scheduled": "2017-04-09T10:28:36",
+                "estimated": "2017-04-09T10:28:36"
+              }
+            },
+            "variant": {
+              "key": "16-0-B",
+              "name": "Selkirk-Osborne to Tyndall Park via Burrows"
+            },
+            "bus": {
+              "bike-rack": "false",
+              "easy-access": "true"
+            }
+          },
+          {
+            "key": "7787331-23",
+            "times": {
+              "arrival": {
+                "scheduled": "2017-04-09T10:52:36",
+                "estimated": "2017-04-09T10:52:36"
+              },
+              "departure": {
+                "scheduled": "2017-04-09T10:52:36",
+                "estimated": "2017-04-09T10:52:36"
+              }
+            },
+            "variant": {
+              "key": "16-0-M",
+              "name": "Selkirk-Osborne to Tyndall Park via Manitoba"
+            },
+            "bus": {
+              "bike-rack": "false",
+              "easy-access": "true"
+            }
+          },
+          {
+            "key": "7787325-24",
+            "times": {
+              "arrival": {
+                "scheduled": "2017-04-09T11:14:36",
+                "estimated": "2017-04-09T11:14:36"
+              },
+              "departure": {
+                "scheduled": "2017-04-09T11:14:36",
+                "estimated": "2017-04-09T11:14:36"
+              }
+            },
+            "variant": {
+              "key": "16-0-B",
+              "name": "Selkirk-Osborne to Tyndall Park via Burrows"
+            },
+            "bus": {
+              "bike-rack": "false",
+              "easy-access": "true"
+            }
+          },
+          {
+            "key": "7787326-9",
+            "times": {
+              "arrival": {
+                "scheduled": "2017-04-09T11:36:07",
+                "estimated": "2017-04-09T11:36:07"
+              },
+              "departure": {
+                "scheduled": "2017-04-09T11:36:07",
+                "estimated": "2017-04-09T11:36:07"
+              }
+            },
+            "variant": {
+              "key": "16-0-M",
+              "name": "Selkirk-Osborne to Tyndall Park via Manitoba"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "query-time": "2017-04-09T09:53:07"
+}
