@@ -1,5 +1,5 @@
 
-##Telegram bot for Winnipeg transit
+#Telegram bot for Winnipeg transit
 
 ###config.properties
     transit.url=http://api.winnipegtransit.com/v2/
