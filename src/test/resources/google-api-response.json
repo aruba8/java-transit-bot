@@ -1,0 +1,95 @@
+{
+  "results": [
+    {
+      "address_components": [
+        {
+          "long_name": "125",
+          "short_name": "125",
+          "types": [
+            "street_number"
+          ]
+        },
+        {
+          "long_name": "Portage Avenue",
+          "short_name": "Portage Ave",
+          "types": [
+            "route"
+          ]
+        },
+        {
+          "long_name": "Saint Eustache",
+          "short_name": "Saint Eustache",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Division No. 11",
+          "short_name": "Division No. 11",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Manitoba",
+          "short_name": "MB",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Canada",
+          "short_name": "CA",
+          "types": [
+            "country",
+            "political"
+          ]
+        },
+        {
+          "long_name": "R0H 1H0",
+          "short_name": "R0H 1H0",
+          "types": [
+            "postal_code"
+          ]
+        }
+      ],
+      "formatted_address": "125 Portage Ave, Saint Eustache, MB R0H 1H0, Canada",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 49.8804192,
+            "lng": -97.32757319999999
+          },
+          "southwest": {
+            "lat": 49.88040729999999,
+            "lng": -97.32757629999999
+          }
+        },
+        "location": {
+          "lat": 49.88040729999999,
+          "lng": -97.32757319999999
+        },
+        "location_type": "RANGE_INTERPOLATED",
+        "viewport": {
+          "northeast": {
+            "lat": 49.8817622302915,
+            "lng": -97.32622576970849
+          },
+          "southwest": {
+            "lat": 49.8790642697085,
+            "lng": -97.32892373029149
+          }
+        }
+      },
+      "partial_match": true,
+      "place_id": "EjMxMjUgUG9ydGFnZSBBdmUsIFNhaW50IEV1c3RhY2hlLCBNQiBSMEggMUgwLCBDYW5hZGE",
+      "types": [
+        "street_address"
+      ]
+    }
+  ],
+  "status": "OK"
+}

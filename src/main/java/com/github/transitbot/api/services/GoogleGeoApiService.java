@@ -69,7 +69,7 @@ public class GoogleGeoApiService {
      * @return Coordinates.
      * @throws GoogleApiZeroResultsException throws if result zero.
      */
-    private Coordinates getCoordinatesFromResponse(HttpResponse<JsonNode> response)
+    public Coordinates getCoordinatesFromResponse(HttpResponse<JsonNode> response)
             throws GoogleApiZeroResultsException {
         String status = response.getBody().getObject().getString("status");
         if (!status.equals("OK")) {

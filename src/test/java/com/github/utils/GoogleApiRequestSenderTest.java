@@ -1,12 +1,20 @@
 package com.github.utils;
 
 import com.github.transitbot.utils.GoogleApiRequestSender;
+import com.mashape.unirest.http.JsonNode;
+import org.apache.commons.io.IOUtils;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockserver.integration.ClientAndProxy;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.JsonBody;
+import com.mashape.unirest.http.HttpResponse;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import static org.mockserver.integration.ClientAndProxy.startClientAndProxy;
 import static org.mockserver.integration.ClientAndServer.startClientAndServer;
@@ -19,15 +27,17 @@ public class GoogleApiRequestSenderTest {
 
     private ClientAndProxy proxy;
     private ClientAndServer mockServer;
+    String tJson;
 
     @Before
-    public void startProxy() {
-//        mockServer = new MockServerClient("localhost", 7777);
-
+    public void startProxy() throws IOException {
+        InputStream is = getClass().getResourceAsStream("/google-api-response.json");
+        tJson = IOUtils.toString(is, Charset.defaultCharset());
         mockServer = startClientAndServer(7777);
         proxy = startClientAndProxy(7778);
         mockServer.when(request().withMethod("GET").withPath("/maps/api/geocode/json"))
-                .respond(response().withStatusCode(200).withBody(JsonBody.json("[{ \"test\": \"XXX%%%XXX\"}]")));
+                .respond(response().withStatusCode(200).withBody(JsonBody.json(tJson)));
+
 
     }
 
@@ -39,6 +49,13 @@ public class GoogleApiRequestSenderTest {
 
     @Test
     public void sendRequestTest() throws Exception {
-        requestSender.sendRequest("http://localhost:7777/maps/api/geocode/json", "", null);
+        HttpResponse<JsonNode> response = requestSender.sendRequest("http://localhost:7777/maps/api/geocode/json", "", null);
+        Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void getCoordinatesFromResponseTest() throws Exception{
+        HttpResponse<JsonNode> response = requestSender.sendRequest("http://localhost:7777/maps/api/geocode/json", "", null);
+
     }
 }
