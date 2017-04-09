@@ -1,0 +1,1883 @@
+{
+  "routes": [
+    {
+      "key": 1,
+      "number": 1,
+      "name": "Route 1 Downtown Spirit (Clockwise)",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "1-0-F"
+        },
+        {
+          "key": "1-0-D"
+        }
+      ]
+    },
+    {
+      "key": 2,
+      "number": 2,
+      "name": "Route 2 Downtown Spirit (Counter-Clockwise)",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "2-0-F"
+        },
+        {
+          "key": "2-0-D"
+        }
+      ]
+    },
+    {
+      "key": 3,
+      "number": 3,
+      "name": "Route 3 Downtown Spirit",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "3-1-C"
+        },
+        {
+          "key": "3-0-U"
+        }
+      ]
+    },
+    {
+      "key": 10,
+      "number": 10,
+      "name": "Route 10 St. Boniface-Wolseley",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "10-1-T#"
+        },
+        {
+          "key": "10-0-#"
+        },
+        {
+          "key": "10-0-SP"
+        },
+        {
+          "key": "10-1-WT"
+        },
+        {
+          "key": "10-0-ST"
+        },
+        {
+          "key": "10-1-WP"
+        },
+        {
+          "key": "10-1-W"
+        },
+        {
+          "key": "10-1-P#"
+        }
+      ]
+    },
+    {
+      "key": 11,
+      "number": 11,
+      "name": "Route 11 Portage-Kildonan",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "11-0-C"
+        },
+        {
+          "key": "11-0-P"
+        },
+        {
+          "key": "11-1-G"
+        },
+        {
+          "key": "11-1-D"
+        },
+        {
+          "key": "11-0-W"
+        },
+        {
+          "key": "11-0-S"
+        },
+        {
+          "key": "11-1-#"
+        },
+        {
+          "key": "11-1-R"
+        },
+        {
+          "key": "11-0-*"
+        },
+        {
+          "key": "11-0-#"
+        },
+        {
+          "key": "11-1-##"
+        },
+        {
+          "key": "11-0-**"
+        },
+        {
+          "key": "11-1-M"
+        }
+      ]
+    },
+    {
+      "key": 12,
+      "number": 12,
+      "name": "Route 12 William",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "12-0-V"
+        },
+        {
+          "key": "12-0-P"
+        },
+        {
+          "key": "12-0-H"
+        },
+        {
+          "key": "12-1-C"
+        }
+      ]
+    },
+    {
+      "key": 14,
+      "number": 14,
+      "name": "Route 14 Ellice-St. Mary's",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "14-1-E"
+        },
+        {
+          "key": "14-0-D"
+        },
+        {
+          "key": "14-0-P"
+        },
+        {
+          "key": "14-1-##"
+        },
+        {
+          "key": "14-0-#"
+        },
+        {
+          "key": "14-1-#"
+        }
+      ]
+    },
+    {
+      "key": 15,
+      "number": 15,
+      "name": "Route 15 Sargent-Mountain",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "15-1-#"
+        },
+        {
+          "key": "15-0-W"
+        },
+        {
+          "key": "15-1-C"
+        },
+        {
+          "key": "15-1-L"
+        },
+        {
+          "key": "15-0-F"
+        },
+        {
+          "key": "15-1-I"
+        },
+        {
+          "key": "15-0-#"
+        },
+        {
+          "key": "15-0-L"
+        }
+      ]
+    },
+    {
+      "key": 16,
+      "number": 16,
+      "name": "Route 16 Selkirk-Osborne",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "16-1-L"
+        },
+        {
+          "key": "16-0-*"
+        },
+        {
+          "key": "16-1-P"
+        },
+        {
+          "key": "16-0-B"
+        },
+        {
+          "key": "16-0-M"
+        },
+        {
+          "key": "16-1-##"
+        },
+        {
+          "key": "16-1-V"
+        },
+        {
+          "key": "16-0-#"
+        },
+        {
+          "key": "16-1-K"
+        },
+        {
+          "key": "16-1-*"
+        },
+        {
+          "key": "16-0-K"
+        },
+        {
+          "key": "16-1-O"
+        },
+        {
+          "key": "16-1-#"
+        }
+      ]
+    },
+    {
+      "key": 17,
+      "number": 17,
+      "name": "Route 17 McGregor",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "17-1-G"
+        },
+        {
+          "key": "17-0-A"
+        },
+        {
+          "key": "17-0-S"
+        },
+        {
+          "key": "17-0-#"
+        },
+        {
+          "key": "17-1-B"
+        },
+        {
+          "key": "17-1-#"
+        },
+        {
+          "key": "17-0-M"
+        },
+        {
+          "key": "17-1-MH"
+        }
+      ]
+    },
+    {
+      "key": 18,
+      "number": 18,
+      "name": "Route 18 North Main-Corydon",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "18-0-J"
+        },
+        {
+          "key": "18-1-E"
+        },
+        {
+          "key": "18-0-R"
+        },
+        {
+          "key": "18-1-M"
+        },
+        {
+          "key": "18-1-C"
+        },
+        {
+          "key": "18-0-#"
+        },
+        {
+          "key": "18-0-T"
+        },
+        {
+          "key": "18-1-#"
+        },
+        {
+          "key": "18-1-A"
+        }
+      ]
+    },
+    {
+      "key": 19,
+      "number": 19,
+      "name": "Route 19 Marion-Logan-Notre Dame",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "19-0-L"
+        },
+        {
+          "key": "19-0-#"
+        },
+        {
+          "key": "19-0-E"
+        },
+        {
+          "key": "19-1-A"
+        },
+        {
+          "key": "19-1-*"
+        },
+        {
+          "key": "19-1-#"
+        },
+        {
+          "key": "19-0-N"
+        },
+        {
+          "key": "19-1-D"
+        }
+      ]
+    },
+    {
+      "key": 20,
+      "number": 20,
+      "name": "Route 20 Academy-Watt",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "20-0-W"
+        },
+        {
+          "key": "20-1-A"
+        },
+        {
+          "key": "20-0-F"
+        },
+        {
+          "key": "20-1-R"
+        },
+        {
+          "key": "20-1-T"
+        },
+        {
+          "key": "20-1-M"
+        },
+        {
+          "key": "20-1-#"
+        }
+      ]
+    },
+    {
+      "key": 21,
+      "number": 21,
+      "name": "Route 21 Portage Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "21-1-*"
+        },
+        {
+          "key": "21-0-C"
+        },
+        {
+          "key": "21-1-#"
+        },
+        {
+          "key": "21-0-S"
+        },
+        {
+          "key": "21-0-W"
+        },
+        {
+          "key": "21-1-D"
+        },
+        {
+          "key": "21-0-G"
+        }
+      ]
+    },
+    {
+      "key": 22,
+      "number": 22,
+      "name": "Route 22 Assiniboia Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "22-0-C"
+        },
+        {
+          "key": "22-1-*"
+        },
+        {
+          "key": "22-1-D"
+        },
+        {
+          "key": "22-0-S"
+        },
+        {
+          "key": "22-0-W"
+        },
+        {
+          "key": "22-1-#"
+        }
+      ]
+    },
+    {
+      "key": 24,
+      "number": 24,
+      "name": "Route 24 Ness Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "24-0-U"
+        },
+        {
+          "key": "24-1-D"
+        },
+        {
+          "key": "24-1-#"
+        },
+        {
+          "key": "24-1-P"
+        }
+      ]
+    },
+    {
+      "key": 25,
+      "number": 25,
+      "name": "Route 25 Ness Super Express",
+      "customer-type": "regular",
+      "coverage": "super express",
+      "variants": [
+        {
+          "key": "25-1-D"
+        },
+        {
+          "key": "25-0-U"
+        }
+      ]
+    },
+    {
+      "key": 26,
+      "number": 26,
+      "name": "Route 26 Logan - Berry",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "26-0-P"
+        },
+        {
+          "key": "26-1-C"
+        },
+        {
+          "key": "26-0-T"
+        }
+      ]
+    },
+    {
+      "key": 28,
+      "number": 28,
+      "name": "Route 28 Brookside Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "28-0-O"
+        },
+        {
+          "key": "28-1-D"
+        },
+        {
+          "key": "28-0-R"
+        },
+        {
+          "key": "28-0-I"
+        }
+      ]
+    },
+    {
+      "key": 29,
+      "number": 29,
+      "name": "Route 29 Sherbrook",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "29-1-L"
+        },
+        {
+          "key": "29-0-W"
+        },
+        {
+          "key": "29-0-C"
+        }
+      ]
+    },
+    {
+      "key": 30,
+      "number": 30,
+      "name": "Route 30 Inkster Park Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "30-1-D"
+        },
+        {
+          "key": "30-0-I"
+        }
+      ]
+    },
+    {
+      "key": 31,
+      "number": 31,
+      "name": "Route 31 Keewatin Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "31-1-D"
+        },
+        {
+          "key": "31-0-O"
+        },
+        {
+          "key": "31-0-M"
+        }
+      ]
+    },
+    {
+      "key": 32,
+      "number": 32,
+      "name": "Route 32 North Main Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "32-0-R"
+        },
+        {
+          "key": "32-1-D"
+        },
+        {
+          "key": "32-0-L"
+        },
+        {
+          "key": "32-1-M"
+        }
+      ]
+    },
+    {
+      "key": 33,
+      "number": 33,
+      "name": "Route 33 Maples",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "33-0-J"
+        },
+        {
+          "key": "33-1-C"
+        },
+        {
+          "key": "33-1-F"
+        },
+        {
+          "key": "33-0-M"
+        },
+        {
+          "key": "33-1-#"
+        },
+        {
+          "key": "33-1-P"
+        }
+      ]
+    },
+    {
+      "key": 34,
+      "number": 34,
+      "name": "Route 34 McPhillips Super Express",
+      "customer-type": "regular",
+      "coverage": "super express",
+      "variants": [
+        {
+          "key": "34-0-M"
+        },
+        {
+          "key": "34-1-D"
+        }
+      ]
+    },
+    {
+      "key": 35,
+      "number": 35,
+      "name": "Route 35 Maples Super Express",
+      "customer-type": "regular",
+      "coverage": "super express",
+      "variants": [
+        {
+          "key": "35-0-A"
+        },
+        {
+          "key": "35-1-C"
+        }
+      ]
+    },
+    {
+      "key": 36,
+      "number": 36,
+      "name": "Route 36 Northwest Super Express",
+      "customer-type": "regular",
+      "coverage": "super express",
+      "variants": [
+        {
+          "key": "36-1-M"
+        },
+        {
+          "key": "36-0-U"
+        },
+        {
+          "key": "36-1-C"
+        }
+      ]
+    },
+    {
+      "key": 38,
+      "number": 38,
+      "name": "Route 38 Salter",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "38-0-T"
+        },
+        {
+          "key": "38-1-M"
+        },
+        {
+          "key": "38-1-F"
+        },
+        {
+          "key": "38-1-S"
+        },
+        {
+          "key": "38-1-D"
+        }
+      ]
+    },
+    {
+      "key": 39,
+      "number": 39,
+      "name": "Route 39 Taylor Park \u0026 Ride Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "39-1-D"
+        },
+        {
+          "key": "39-0-T"
+        }
+      ]
+    },
+    {
+      "key": 40,
+      "number": 40,
+      "name": "Route 40 All Seasons Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "40-0-S"
+        },
+        {
+          "key": "40-1-D"
+        }
+      ]
+    },
+    {
+      "key": 41,
+      "number": 41,
+      "name": "Route 41 Henderson Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "41-0-G"
+        },
+        {
+          "key": "41-1-D"
+        },
+        {
+          "key": "41-0-N"
+        }
+      ]
+    },
+    {
+      "key": 42,
+      "number": 42,
+      "name": "Route 42 Plessis Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "42-0-L"
+        },
+        {
+          "key": "42-1-D"
+        }
+      ]
+    },
+    {
+      "key": 43,
+      "number": 43,
+      "name": "Route 43 Munroe",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "43-0-K"
+        },
+        {
+          "key": "43-1-D"
+        }
+      ]
+    },
+    {
+      "key": 44,
+      "number": 44,
+      "name": "Route 44 Grey",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "44-0-L"
+        },
+        {
+          "key": "44-1-M"
+        },
+        {
+          "key": "44-0-M"
+        },
+        {
+          "key": "44-1-L"
+        },
+        {
+          "key": "44-1-D"
+        },
+        {
+          "key": "44-1-*"
+        }
+      ]
+    },
+    {
+      "key": 45,
+      "number": 45,
+      "name": "Route 45 Talbot",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "45-0-K"
+        },
+        {
+          "key": "45-1-D"
+        },
+        {
+          "key": "45-1-#"
+        },
+        {
+          "key": "45-0-M"
+        }
+      ]
+    },
+    {
+      "key": 46,
+      "number": 46,
+      "name": "Route 46 Transcona Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "46-0-K"
+        },
+        {
+          "key": "46-1-P"
+        },
+        {
+          "key": "46-1-D"
+        },
+        {
+          "key": "46-0-R"
+        }
+      ]
+    },
+    {
+      "key": 47,
+      "number": 47,
+      "name": "Route 47 Transcona",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "47-1-D"
+        },
+        {
+          "key": "47-0-K"
+        },
+        {
+          "key": "47-1-P"
+        },
+        {
+          "key": "47-1-#"
+        },
+        {
+          "key": "47-0-R"
+        }
+      ]
+    },
+    {
+      "key": 48,
+      "number": 48,
+      "name": "Route 48 McMeans Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "48-0-T"
+        },
+        {
+          "key": "48-1-D"
+        }
+      ]
+    },
+    {
+      "key": 49,
+      "number": 49,
+      "name": "Route 49 Dugald",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "49-1-D"
+        },
+        {
+          "key": "49-0-T"
+        },
+        {
+          "key": "49-0-S"
+        }
+      ]
+    },
+    {
+      "key": 50,
+      "number": 50,
+      "name": "Route 50 Archibald",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "50-0-S"
+        },
+        {
+          "key": "50-1-D"
+        },
+        {
+          "key": "50-1-W"
+        }
+      ]
+    },
+    {
+      "key": 51,
+      "number": 51,
+      "name": "Route 51 St. Vital Centre - University of Manitoba",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "51-1-S"
+        },
+        {
+          "key": "51-0-U"
+        }
+      ]
+    },
+    {
+      "key": 53,
+      "number": 53,
+      "name": "Route 53 Norwood",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "53-1-D"
+        },
+        {
+          "key": "53-0-N"
+        }
+      ]
+    },
+    {
+      "key": 54,
+      "number": 54,
+      "name": "Route 54 St. Mary's Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "54-0-A"
+        },
+        {
+          "key": "54-0-S"
+        },
+        {
+          "key": "54-1-D"
+        }
+      ]
+    },
+    {
+      "key": 55,
+      "number": 55,
+      "name": "Route 55 St. Anne's",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "55-1-M"
+        },
+        {
+          "key": "55-0-M"
+        },
+        {
+          "key": "55-1-##"
+        },
+        {
+          "key": "55-1-D"
+        },
+        {
+          "key": "55-0-D"
+        },
+        {
+          "key": "55-1-#"
+        }
+      ]
+    },
+    {
+      "key": 56,
+      "number": 56,
+      "name": "Route 56 St. Boniface",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "56-0-S"
+        },
+        {
+          "key": "56-1-D"
+        },
+        {
+          "key": "56-1-#"
+        }
+      ]
+    },
+    {
+      "key": 57,
+      "number": 57,
+      "name": "Route 57 Southdale Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "57-1-D"
+        },
+        {
+          "key": "57-0-S"
+        }
+      ]
+    },
+    {
+      "key": 58,
+      "number": 58,
+      "name": "Route 58 Dakota Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "58-0-W"
+        },
+        {
+          "key": "58-1-D"
+        },
+        {
+          "key": "58-0-A"
+        }
+      ]
+    },
+    {
+      "key": 59,
+      "number": 59,
+      "name": "Route 59 South St. Anne's Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "59-0-A"
+        },
+        {
+          "key": "59-0-I"
+        },
+        {
+          "key": "59-1-D"
+        }
+      ]
+    },
+    {
+      "key": 60,
+      "number": 60,
+      "name": "Route 60 Pembina",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "60-0-U"
+        },
+        {
+          "key": "60-1-D"
+        }
+      ]
+    },
+    {
+      "key": 64,
+      "number": 64,
+      "name": "Route 64 Lindenwoods Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "64-0-L"
+        },
+        {
+          "key": "64-1-D"
+        }
+      ]
+    },
+    {
+      "key": 65,
+      "number": 65,
+      "name": "Route 65 Grant Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "65-0-W"
+        },
+        {
+          "key": "65-1-R"
+        },
+        {
+          "key": "65-1-D"
+        },
+        {
+          "key": "65-1-K"
+        }
+      ]
+    },
+    {
+      "key": 66,
+      "number": 66,
+      "name": "Route 66 Grant",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "66-1-K"
+        },
+        {
+          "key": "66-0-P"
+        },
+        {
+          "key": "66-1-D"
+        },
+        {
+          "key": "66-0-U"
+        },
+        {
+          "key": "66-0-C"
+        }
+      ]
+    },
+    {
+      "key": 67,
+      "number": 67,
+      "name": "Route 67 Charleswood Express",
+      "customer-type": "regular",
+      "coverage": "express",
+      "variants": [
+        {
+          "key": "67-0-K#"
+        },
+        {
+          "key": "67-1-K"
+        }
+      ]
+    },
+    {
+      "key": 68,
+      "number": 68,
+      "name": "Route 68 Crescent",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "68-0-G"
+        },
+        {
+          "key": "68-1-W"
+        },
+        {
+          "key": "68-1-#"
+        }
+      ]
+    },
+    {
+      "key": 71,
+      "number": 71,
+      "name": "Route 71 Arlington",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "71-0-S#"
+        },
+        {
+          "key": "71-1-M"
+        },
+        {
+          "key": "71-0-M#"
+        },
+        {
+          "key": "71-1-S"
+        },
+        {
+          "key": "71-1-#"
+        }
+      ]
+    },
+    {
+      "key": 72,
+      "number": 72,
+      "name": "Route 72",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "72-0-K"
+        },
+        {
+          "key": "72-1-U"
+        },
+        {
+          "key": "72-0-D"
+        }
+      ]
+    },
+    {
+      "key": 75,
+      "number": 75,
+      "name": "Route 75 Crosstown East",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "75-0-U"
+        },
+        {
+          "key": "75-1-K"
+        }
+      ]
+    },
+    {
+      "key": 76,
+      "number": 76,
+      "name": "Route 76",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "76-0-U"
+        },
+        {
+          "key": "76-1-S"
+        }
+      ]
+    },
+    {
+      "key": 77,
+      "number": 77,
+      "name": "Route 77 Crosstown North",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "77-1-K"
+        },
+        {
+          "key": "77-0-P"
+        },
+        {
+          "key": "77-0-G"
+        },
+        {
+          "key": "77-1-G"
+        },
+        {
+          "key": "77-1-R"
+        },
+        {
+          "key": "77-1-M"
+        },
+        {
+          "key": "77-0-M"
+        },
+        {
+          "key": "77-0-#"
+        },
+        {
+          "key": "77-1-H"
+        }
+      ]
+    },
+    {
+      "key": 78,
+      "number": 78,
+      "name": "Route 78 Crosstown West",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "78-0-K"
+        },
+        {
+          "key": "78-1-C"
+        },
+        {
+          "key": "78-0-C"
+        },
+        {
+          "key": "78-1-K"
+        }
+      ]
+    },
+    {
+      "key": 79,
+      "number": 79,
+      "name": "Route 79 Charleswood",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "79-0-K#"
+        },
+        {
+          "key": "79-1-P"
+        },
+        {
+          "key": "79-1-K"
+        }
+      ]
+    },
+    {
+      "key": 82,
+      "number": 82,
+      "name": "Route 82 Grace Hospital - Unicity",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "82-0-U"
+        },
+        {
+          "key": "82-1-G"
+        }
+      ]
+    },
+    {
+      "key": 83,
+      "number": 83,
+      "name": "Route 83 Unicity - Strauss Dr - Murray Industrial Park",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "83-1-M"
+        },
+        {
+          "key": "83-0-U"
+        },
+        {
+          "key": "83-1-T"
+        },
+        {
+          "key": "83-1-G"
+        },
+        {
+          "key": "83-0-A"
+        }
+      ]
+    },
+    {
+      "key": 84,
+      "number": 84,
+      "name": "Route 84 Whyte Ridge",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "84-0-W"
+        },
+        {
+          "key": "84-1-S"
+        }
+      ]
+    },
+    {
+      "key": 85,
+      "number": 85,
+      "name": "Route 85 Kildonan Place - North Kildonan",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "85-1-W"
+        },
+        {
+          "key": "85-0-K"
+        },
+        {
+          "key": "85-0-A"
+        }
+      ]
+    },
+    {
+      "key": 86,
+      "number": 86,
+      "name": "Route 86 Whyte Ridge",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "86-0-W"
+        },
+        {
+          "key": "86-1-S"
+        }
+      ]
+    },
+    {
+      "key": 87,
+      "number": 87,
+      "name": "Route 87 South Transcona - Crossroads Station",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "87-0-S"
+        },
+        {
+          "key": "87-1-C"
+        },
+        {
+          "key": "87-0-B"
+        }
+      ]
+    },
+    {
+      "key": 88,
+      "number": 88,
+      "name": "Route 88 Inkster Industrial Park - Scotia",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "88-0-F"
+        },
+        {
+          "key": "88-1-C"
+        }
+      ]
+    },
+    {
+      "key": 89,
+      "number": 89,
+      "name": "Route 89 North Transcona - Kildonan Place",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "89-1-K"
+        },
+        {
+          "key": "89-0-T"
+        },
+        {
+          "key": "89-1-D"
+        }
+      ]
+    },
+    {
+      "key": 90,
+      "number": 90,
+      "name": "Route 90 Kildonan Place - Whellams Lane",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "90-1-W"
+        },
+        {
+          "key": "90-0-K"
+        },
+        {
+          "key": "90-0-T"
+        }
+      ]
+    },
+    {
+      "key": 91,
+      "number": 91,
+      "name": "Route 91 St. Norbert",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "91-0-S"
+        },
+        {
+          "key": "91-1-K"
+        }
+      ]
+    },
+    {
+      "key": 92,
+      "number": 92,
+      "name": "Route 92 Crossroads Station - Lakeside Meadows",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "92-0-L"
+        },
+        {
+          "key": "92-1-C"
+        },
+        {
+          "key": "92-1-K"
+        }
+      ]
+    },
+    {
+      "key": 93,
+      "number": 93,
+      "name": "Route 93 South St. Vital - St. Vital Centre",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "93-0-H"
+        },
+        {
+          "key": "93-1-S"
+        }
+      ]
+    },
+    {
+      "key": 94,
+      "number": 94,
+      "name": "Route 94 Kenaston - Fort Garry",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "94-0-K"
+        },
+        {
+          "key": "94-1-W"
+        },
+        {
+          "key": "94-1-P"
+        }
+      ]
+    },
+    {
+      "key": 95,
+      "number": 95,
+      "name": "Route 95 Tuxedo - Riverview",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "95-1-M"
+        },
+        {
+          "key": "95-0-S"
+        },
+        {
+          "key": "95-0-F"
+        },
+        {
+          "key": "95-0-pp"
+        },
+        {
+          "key": "95-1-R"
+        },
+        {
+          "key": "95-0-p"
+        },
+        {
+          "key": "95-1-F"
+        }
+      ]
+    },
+    {
+      "key": 96,
+      "number": 96,
+      "name": "Route 96 St. Vital Centre - Windsor Park",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "96-1-S"
+        },
+        {
+          "key": "96-0-P"
+        },
+        {
+          "key": "96-0-L"
+        },
+        {
+          "key": "96-1-L"
+        }
+      ]
+    },
+    {
+      "key": 97,
+      "number": 97,
+      "name": "Route 97 Inkster Industrial Park - Point Douglas",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "97-1-P"
+        },
+        {
+          "key": "97-0-F"
+        }
+      ]
+    },
+    {
+      "key": 98,
+      "number": 98,
+      "name": "Route 98 Westdale - Grace Hospital",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "98-0-U"
+        },
+        {
+          "key": "98-0-W"
+        },
+        {
+          "key": "98-1-G"
+        }
+      ]
+    },
+    {
+      "key": 99,
+      "number": 99,
+      "name": "Route 99 Downtown - Misericordia Health Centre - Windermere \u0026 Pembina",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "99-0-M"
+        },
+        {
+          "key": "99-1-D"
+        },
+        {
+          "key": "99-0-D"
+        },
+        {
+          "key": "99-0-W"
+        },
+        {
+          "key": "99-1-S"
+        }
+      ]
+    },
+    {
+      "key": 101,
+      "number": 101,
+      "name": "Route 101 DART 101",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "101-0"
+        },
+        {
+          "key": "101-1"
+        }
+      ]
+    },
+    {
+      "key": 102,
+      "number": 102,
+      "name": "Route 102 DART 102",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "102-0"
+        },
+        {
+          "key": "102-1"
+        }
+      ]
+    },
+    {
+      "key": 109,
+      "number": 109,
+      "name": "Route 109 DART 109",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "109-0"
+        },
+        {
+          "key": "109-1-?"
+        }
+      ]
+    },
+    {
+      "key": 110,
+      "number": 110,
+      "name": "Route 110 DART 110",
+      "customer-type": "regular",
+      "coverage": "regular",
+      "variants": [
+        {
+          "key": "110-0"
+        },
+        {
+          "key": "110-1"
+        }
+      ]
+    },
+    {
+      "key": 137,
+      "number": 137,
+      "name": "Route 137 Richmond Super Express",
+      "customer-type": "regular",
+      "coverage": "rapid transit",
+      "variants": [
+        {
+          "key": "137-0-U"
+        },
+        {
+          "key": "137-0-S"
+        },
+        {
+          "key": "137-1-D"
+        }
+      ]
+    },
+    {
+      "key": 160,
+      "number": 160,
+      "name": "Route 160 Downtown - University of Manitoba",
+      "customer-type": "regular",
+      "coverage": "rapid transit",
+      "variants": [
+        {
+          "key": "160-0-U"
+        },
+        {
+          "key": "160-1-D"
+        }
+      ]
+    },
+    {
+      "key": 161,
+      "number": 161,
+      "name": "Route 161 University Super Express",
+      "customer-type": "regular",
+      "coverage": "rapid transit",
+      "variants": [
+        {
+          "key": "161-0-U"
+        },
+        {
+          "key": "161-1-D"
+        }
+      ]
+    },
+    {
+      "key": 162,
+      "number": 162,
+      "name": "Route 162 Downtown - Ft Richmond - U of M - St Norbert Express",
+      "customer-type": "regular",
+      "coverage": "rapid transit",
+      "variants": [
+        {
+          "key": "162-0-U"
+        },
+        {
+          "key": "162-1-D"
+        },
+        {
+          "key": "162-0-S"
+        },
+        {
+          "key": "162-1-K"
+        },
+        {
+          "key": "162-0-T"
+        }
+      ]
+    },
+    {
+      "key": 163,
+      "number": 163,
+      "name": "Route 163 Waverley Heights Express",
+      "customer-type": "regular",
+      "coverage": "rapid transit",
+      "variants": [
+        {
+          "key": "163-0-W"
+        },
+        {
+          "key": "163-1-P"
+        },
+        {
+          "key": "163-1-D"
+        }
+      ]
+    },
+    {
+      "key": 170,
+      "number": 170,
+      "name": "Route 170 Downtown - Ft Richmond - U of M - St Norbert",
+      "customer-type": "regular",
+      "coverage": "rapid transit",
+      "variants": [
+        {
+          "key": "170-0-S"
+        },
+        {
+          "key": "170-1-K"
+        },
+        {
+          "key": "170-1-D"
+        },
+        {
+          "key": "170-0-U"
+        }
+      ]
+    },
+    {
+      "key": 180,
+      "number": 180,
+      "name": "Route 180 Industrial Express",
+      "customer-type": "regular",
+      "coverage": "rapid transit",
+      "variants": [
+        {
+          "key": "180-1-D"
+        },
+        {
+          "key": "180-0-K"
+        }
+      ]
+    },
+    {
+      "key": 181,
+      "number": 181,
+      "name": "Route 181 Whyte Ridge Express",
+      "customer-type": "regular",
+      "coverage": "rapid transit",
+      "variants": [
+        {
+          "key": "181-0-W"
+        },
+        {
+          "key": "181-1-D"
+        },
+        {
+          "key": "181-1-C"
+        }
+      ]
+    },
+    {
+      "key": 183,
+      "number": 183,
+      "name": "Route 183 Richmond West Express",
+      "customer-type": "regular",
+      "coverage": "rapid transit",
+      "variants": [
+        {
+          "key": "183-1-D"
+        },
+        {
+          "key": "183-0-R"
+        },
+        {
+          "key": "183-0-S"
+        }
+      ]
+    },
+    {
+      "key": 185,
+      "number": 185,
+      "name": "Route 185 Osborne Village Express",
+      "customer-type": "regular",
+      "coverage": "rapid transit",
+      "variants": [
+        {
+          "key": "185-0-U"
+        },
+        {
+          "key": "185-1-O"
+        }
+      ]
+    }
+  ],
+  "query-time": "2017-04-09T10:10:40"
+}
