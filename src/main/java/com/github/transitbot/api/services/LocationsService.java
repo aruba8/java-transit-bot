@@ -17,7 +17,13 @@ public class LocationsService {
      */
     private String routesPath = "locations";
 
-    public HttpResponse getLocationsByCoordinates(Coordinates coordinates){
+    /**
+     * get locations json from api.
+     *
+     * @param coordinates coordinates
+     * @return response
+     */
+    public HttpResponse getLocationsByCoordinates(Coordinates coordinates) {
         Map params = new HashMap();
         params.put("lat", coordinates.getLatitude());
         params.put("lon", coordinates.getLongitude());

@@ -17,8 +17,9 @@ public class Coordinates {
 
     /**
      * Constructor.
+     *
      * @param longitude longitude
-     * @param latitude latitude
+     * @param latitude  latitude
      */
     public Coordinates(String longitude, String latitude) {
         this.longitude = longitude;
@@ -27,6 +28,7 @@ public class Coordinates {
 
     /**
      * getter.
+     *
      * @return longitude as string.
      */
     public String getLongitude() {
@@ -35,6 +37,7 @@ public class Coordinates {
 
     /**
      * setter.
+     *
      * @param longitude string
      */
     public void setLongitude(String longitude) {
@@ -43,6 +46,7 @@ public class Coordinates {
 
     /**
      * getter.
+     *
      * @return latitude as string.
      */
     public String getLatitude() {
@@ -51,6 +55,7 @@ public class Coordinates {
 
     /**
      * setter.
+     *
      * @param latitude as string.
      */
     public void setLatitude(String latitude) {
@@ -59,10 +64,11 @@ public class Coordinates {
 
     /**
      * to string method.
+     *
      * @return string
      */
     @Override
-    public String toString(){
-        return "Lat: "+this.latitude+" Lon: "+this.longitude;
+    public String toString() {
+        return "Lat: " + this.latitude + " Lon: " + this.longitude;
     }
 }
