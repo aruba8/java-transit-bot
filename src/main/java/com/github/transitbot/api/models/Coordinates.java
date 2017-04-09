@@ -56,4 +56,13 @@ public class Coordinates {
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
+
+    /**
+     * to string method.
+     * @return string
+     */
+    @Override
+    public String toString(){
+        return "Lat: "+this.latitude+" Lon: "+this.longitude;
+    }
 }
