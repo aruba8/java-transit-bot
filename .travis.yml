@@ -2,5 +2,5 @@ language: java
 jdk:
   - oraclejdk8
 script:
-  - echo -e "bot.token= \r\ntransit.url=http://localhost:7777/ \r\ntransit.key= \r\ngoogle.api.url=http://localhost:7777/ \r\ngoogle.api.key=" >> test.conf
+  - echo -e "bot.token= \r\ntransit.url=http://localhost:7777/ \r\ntransit.key= \r\ngoogle.api.url=http://localhost:7777/ \r\ngoogle.api.key=" >> config.properties
   - mvn test -B
