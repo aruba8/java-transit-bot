@@ -15,11 +15,12 @@ import org.telegram.telegrambots.TelegramApiException;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.api.objects.CallbackQuery;
-import org.telegram.telegrambots.api.objects.Location;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.logging.BotLogger;
 
@@ -46,11 +47,13 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
      */
     private final int amountOfSchedulesInList = 5;
 
+    private StartCommand startCommand = new StartCommand();
+
     /**
      * Constructor.
      */
     public CommandsHandler() {
-        register(new StartCommand());
+        register(startCommand);
 
         HelpCommand helpCommand = new HelpCommand(this);
         register(helpCommand);
@@ -71,26 +74,9 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
 
     @Override
     public void processNonCommandUpdate(Update update) {
-        Message message = update.getMessage();
         try {
-
-            Location location = null;
-
-            if (message != null) {
-                location = message.getLocation();
-            }
-
             CallbackQuery callbackQuery = update.getCallbackQuery();
-
-            if (callbackQuery == null && message.hasText()) {
-
-                if (validateStopNumber(message.getText())) {
-                    showAnswerOnStopNumber(message);
-                } else {
-                    handleWrongMessage(message);
-                }
-
-            } else if (callbackQuery != null) {
+            if (callbackQuery != null) {
                 String callBackData = callbackQuery.getData();
                 String[] callBackDataArray = callBackData.split(":");
                 String callbackButtonCode = callBackDataArray[0];
@@ -103,11 +89,37 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
                         showSchedule(callbackQuery, stopNumber);
                         break;
                     default:
+                        showInitialKeyboard(callbackQuery);
                 }
-            } else if (location != null) {
-                BotLogger.info(LOGTAG, "Location received. (lon: " + location.getLongitude()
-                        + ", lat: " + location.getLatitude() + ")");
             }
+
+
+            Message message = update.getMessage();
+            if (message != null) {
+                String text = "";
+                if (message.hasText()) {
+                    text = message.getText();
+                }
+
+                switch (text) {
+                    case "Get schedule by stop number":
+                        enterStopNumberMessage(message);
+                        return;
+                    case "Use trip planner":
+                        ;
+                }
+
+                if (message.hasText()) {
+                    if (validateStopNumber(message.getText())) {
+                        showAnswerOnStopNumber(message);
+                    } else {
+                        handleWrongMessage(message);
+                    }
+
+                }
+
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -242,6 +254,46 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         sendMessage(sendMessage);
     }
 
+    public void enterStopNumberMessage(Message message) throws TelegramApiException {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setText("Enter stop number: ");
+        sendMessage.setChatId(message.getChatId().toString());
+        sendMessage(sendMessage);
+    }
+
+    public void showInitialKeyboard(CallbackQuery callbackQuery) {
+        SendMessage message = new SendMessage();
+        message.setChatId(callbackQuery.getMessage().getChatId().toString());
+
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        keyboardMarkup.setOneTimeKeyboad(true);
+        // Create the keyboard (list of keyboard rows)
+        List<KeyboardRow> keyboard = new ArrayList<>();
+        // Create a keyboard row
+        KeyboardRow row = new KeyboardRow();
+        // Set each button, you can also use KeyboardButton objects if you need something else than text
+        row.add("Get schedule by stop number");
+        // Add the first row to the keyboard
+        keyboard.add(row);
+        // Create another keyboard row
+        row = new KeyboardRow();
+        // Set each button for the second line
+        row.add("Use trip planner");
+        // Add the second row to the keyboard
+        keyboard.add(row);
+        // Set the keyboard to the markup
+        keyboardMarkup.setKeyboard(keyboard);
+        // Add it to the message
+        message.setReplyMarkup(keyboardMarkup);
+        message.setText("What are we going to do?");
+        try {
+            sendMessage(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     /**
      * Create inline keyboard.
      *
@@ -254,10 +306,13 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         List<InlineKeyboardButton> internalKeyboard = new ArrayList<>();
         InlineKeyboardButton infoButton = new InlineKeyboardButton();
         InlineKeyboardButton scheduleButton = new InlineKeyboardButton();
+        InlineKeyboardButton backButton = new InlineKeyboardButton();
         infoButton.setText("Info").setCallbackData("1:" + stopNumber);
         scheduleButton.setText("Schedules").setCallbackData("2:" + stopNumber);
+        backButton.setText("Back").setCallbackData("3:" + stopNumber);
         internalKeyboard.add(infoButton);
         internalKeyboard.add(scheduleButton);
+        internalKeyboard.add(backButton);
         keyBoard.add(internalKeyboard);
         markup.setKeyboard(keyBoard);
         return markup;
