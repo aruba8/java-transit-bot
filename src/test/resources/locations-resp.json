@@ -1,0 +1,133 @@
+{
+  "locations": [
+    {
+      "key": 4152,
+      "name": "MTS - Corporate Head Office",
+      "categories": [
+        "Utilities"
+      ],
+      "address": {
+        "key": 133579,
+        "street-number": 333,
+        "street": {
+          "key": 2265,
+          "name": "Main Street",
+          "type": "Street"
+        },
+        "centre": {
+          "utm": {
+            "zone": "14U",
+            "x": 633757,
+            "y": 5528609
+          },
+          "geographic": {
+            "latitude": "49.89491",
+            "longitude": "-97.13763"
+          }
+        }
+      },
+      "type": "monument"
+    },
+    {
+      "key": 4153,
+      "name": "Bank of Montreal Building",
+      "categories": [
+        "Office Buildings"
+      ],
+      "address": {
+        "key": 133579,
+        "street-number": 333,
+        "street": {
+          "key": 2265,
+          "name": "Main Street",
+          "type": "Street"
+        },
+        "centre": {
+          "utm": {
+            "zone": "14U",
+            "x": 633757,
+            "y": 5528609
+          },
+          "geographic": {
+            "latitude": "49.89491",
+            "longitude": "-97.13763"
+          }
+        }
+      },
+      "type": "monument"
+    },
+    {
+      "key": 133579,
+      "street-number": 333,
+      "street": {
+        "key": 2265,
+        "name": "Main Street",
+        "type": "Street"
+      },
+      "centre": {
+        "utm": {
+          "zone": "14U",
+          "x": 633757,
+          "y": 5528609
+        },
+        "geographic": {
+          "latitude": "49.89491",
+          "longitude": "-97.13763"
+        }
+      },
+      "type": "address"
+    },
+    {
+      "key": "41059:2265@2871",
+      "street": {
+        "key": 2265,
+        "name": "Main Street",
+        "type": "Street"
+      },
+      "cross-street": {
+        "key": 2871,
+        "name": "Pioneer Avenue",
+        "type": "Avenue"
+      },
+      "centre": {
+        "utm": {
+          "zone": "14U",
+          "x": 633731,
+          "y": 5528582
+        },
+        "geographic": {
+          "latitude": "49.89467",
+          "longitude": "-97.13801"
+        }
+      },
+      "type": "intersection"
+    },
+    {
+      "key": "6006878:2904@70002155",
+      "street": {
+        "key": 2904,
+        "name": "Portage Avenue",
+        "type": "Avenue",
+        "leg": "East"
+      },
+      "cross-street": {
+        "key": 70002155,
+        "name": "Lombard Place",
+        "type": "Place"
+      },
+      "centre": {
+        "utm": {
+          "zone": "14U",
+          "x": "633746.95",
+          "y": "5528666.02"
+        },
+        "geographic": {
+          "latitude": "49.89542",
+          "longitude": "-97.13776"
+        }
+      },
+      "type": "intersection"
+    }
+  ],
+  "query-time": "2017-04-09T10:34:03"
+}

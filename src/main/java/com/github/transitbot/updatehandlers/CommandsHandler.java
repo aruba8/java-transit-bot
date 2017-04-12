@@ -47,12 +47,12 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
      */
     private final int amountOfSchedulesInList = 5;
 
-    private StartCommand startCommand = new StartCommand();
 
     /**
      * Constructor.
      */
     public CommandsHandler() {
+        StartCommand startCommand = new StartCommand();
         register(startCommand);
 
         HelpCommand helpCommand = new HelpCommand(this);
@@ -105,8 +105,9 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
                     case "Get schedule by stop number":
                         enterStopNumberMessage(message);
                         return;
-                    case "Use trip planner":
-                        ;
+//                    case "Use trip planner":
+//                        ;
+                    default:
                 }
 
                 if (message.hasText()) {
@@ -254,6 +255,12 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         sendMessage(sendMessage);
     }
 
+    /**
+     * show enter stop number message.
+     *
+     * @param message message
+     * @throws TelegramApiException TelegramApiException
+     */
     public void enterStopNumberMessage(Message message) throws TelegramApiException {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText("Enter stop number: ");
@@ -261,6 +268,11 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         sendMessage(sendMessage);
     }
 
+    /**
+     * creates and show initial keyboard.
+     *
+     * @param callbackQuery callbackQuery
+     */
     public void showInitialKeyboard(CallbackQuery callbackQuery) {
         SendMessage message = new SendMessage();
         message.setChatId(callbackQuery.getMessage().getChatId().toString());
