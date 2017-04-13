@@ -105,7 +105,7 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
                     case "Get schedule by stop number":
                         enterStopNumberMessage(message);
                         return;
-//                    case "Use trip planner":
+                    case "Use trip planner":
 //                        ;
                     default:
                 }
