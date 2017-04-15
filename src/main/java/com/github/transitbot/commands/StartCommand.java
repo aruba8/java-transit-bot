@@ -1,5 +1,7 @@
 package com.github.transitbot.commands;
 
+import com.github.transitbot.dao.DBService;
+import com.github.transitbot.dao.models.ChatState;
 import com.github.transitbot.utils.TemplateUtility;
 import org.telegram.telegrambots.TelegramApiException;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
@@ -45,6 +47,15 @@ public class StartCommand extends BotCommand {
         answer.setChatId(chat.getId().toString());
         answer.setText(templateUtility.renderTemplate("start.ftlh", "data", root));
 
+        Long chatId = chat.getId();
+        ChatState state = DBService.getChatStateByChatId(chatId);
+        if (state == null) {
+            state = new ChatState(chatId, 0);
+            DBService.saveChatState(state);
+        } else {
+            state = new ChatState(chatId, 0);
+            DBService.updateChatState(state);
+        }
 
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         keyboardMarkup.setOneTimeKeyboad(true);
