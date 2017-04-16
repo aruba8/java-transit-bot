@@ -1,5 +1,6 @@
 package com.github.transitbot.updatehandlers;
 
+import com.github.transitbot.actions.TripPlannerAction;
 import com.github.transitbot.api.models.BusSchedule;
 import com.github.transitbot.api.models.Route;
 import com.github.transitbot.api.services.BusScheduleService;
@@ -8,6 +9,8 @@ import com.github.transitbot.api.services.StopService;
 import com.github.transitbot.api.services.exceptions.StopNotFoundException;
 import com.github.transitbot.commands.HelpCommand;
 import com.github.transitbot.commands.StartCommand;
+import com.github.transitbot.dao.DBService;
+import com.github.transitbot.dao.models.ChatState;
 import com.github.transitbot.utils.ConfigReader;
 import com.github.transitbot.utils.Emoji;
 import com.github.transitbot.utils.TemplateUtility;
@@ -41,7 +44,18 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
      * tag for logs.
      */
     private static final String LOGTAG = "COMMANDSHANDLER";
-
+    /**
+     * INITIAL_STATE.
+     */
+    private final int INITIAL_STATE = 0;
+    /**
+     * BUS_SCHEDULE_STATE.
+     */
+    private final int BUS_SCHEDULE_STATE = 1;
+    /**
+     * TRIP_PLANNER_STATE.
+     */
+    private final int TRIP_PLANNER_STATE = 2;
     /**
      * amount of schedules in list.
      */
@@ -74,9 +88,15 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
 
     @Override
     public void processNonCommandUpdate(Update update) {
+        BotLogger.info(LOGTAG, "##### update id: " + update.getUpdateId());
+        TripPlannerAction tripPlannerAction = new TripPlannerAction();
+        ChatState chatState;
         try {
             CallbackQuery callbackQuery = update.getCallbackQuery();
             if (callbackQuery != null) {
+                Long chatId = callbackQuery.getMessage().getChatId();
+                BotLogger.info(LOGTAG, "##### callback chat id: " + chatId);
+                chatState = DBService.getChatStateByChatId(chatId);
                 String callBackData = callbackQuery.getData();
                 String[] callBackDataArray = callBackData.split(":");
                 String callbackButtonCode = callBackDataArray[0];
@@ -89,34 +109,44 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
                         showSchedule(callbackQuery, stopNumber);
                         break;
                     default:
+                        chatState.setChatState(INITIAL_STATE);
+                        DBService.updateChatState(chatState);
                         showInitialKeyboard(callbackQuery);
                 }
+                BotLogger.info(LOGTAG, String.valueOf(chatState));
             }
-
-
             Message message = update.getMessage();
             if (message != null) {
                 String text = "";
                 if (message.hasText()) {
                     text = message.getText();
                 }
-
+                Long chatId = message.getChatId();
+                BotLogger.info(LOGTAG, "##### message chat id: " + chatId);
+                chatState = DBService.getChatStateByChatId(chatId);
                 switch (text) {
                     case "Get schedule by stop number":
+                        chatState.setChatState(BUS_SCHEDULE_STATE);
+                        DBService.updateChatState(chatState);
                         enterStopNumberMessage(message);
                         return;
                     case "Use trip planner":
-//                        ;
+                        chatState.setChatState(TRIP_PLANNER_STATE);
+                        DBService.updateChatState(chatState);
+                        tripPlannerAction.enterDestinationMessage(message, this);
                     default:
                 }
 
-                if (message.hasText()) {
+                if (chatState.getChatState() == BUS_SCHEDULE_STATE && message.hasText()) {
                     if (validateStopNumber(message.getText())) {
                         showAnswerOnStopNumber(message);
                     } else {
                         handleWrongMessage(message);
                     }
+                }
 
+                if (chatState.getChatState() == TRIP_PLANNER_STATE && message.hasText()) {
+                    handleWrongMessage(message);
                 }
 
             }
