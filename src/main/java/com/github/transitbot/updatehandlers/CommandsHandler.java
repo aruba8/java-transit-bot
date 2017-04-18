@@ -48,14 +48,51 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
      * INITIAL_STATE.
      */
     private final int INITIAL_STATE = 0;
+
     /**
      * BUS_SCHEDULE_STATE.
      */
     private final int BUS_SCHEDULE_STATE = 1;
+
     /**
      * TRIP_PLANNER_STATE.
      */
-    private final int TRIP_PLANNER_STATE = 2;
+    private final int TRIP_PLANNER_STATE_0 = 2;
+    /**
+     * TRIP_PLANNER_STATE.
+     */
+    private final int TRIP_PLANNER_STATE_1 = 3;
+
+    /**
+     * TRIP_PLANNER_STATE.
+     */
+    private final int TRIP_PLANNER_STATE_2 = 4;
+    /**
+     * TRIP_PLANNER_STATE.
+     */
+    private final int TRIP_PLANNER_STATE_3 = 5;
+
+    /**
+     * TRIP_PLANNER_STATE.
+     */
+    private final int TRIP_PLANNER_STATE_4 = 6;
+
+    /**
+     * TRIP_PLANNER_STATE.
+     */
+    private final int TRIP_PLANNER_STATE_5 = 7;
+
+    /**
+     * TRIP_PLANNER_STATE.
+     */
+    private final int TRIP_PLANNER_STATE_6 = 8;
+
+    /**
+     * TRIP_PLANNER_STATE.
+     */
+    private final int TRIP_PLANNER_STATE_7 = 9;
+
+
     /**
      * amount of schedules in list.
      */
@@ -131,9 +168,10 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
                         enterStopNumberMessage(message);
                         return;
                     case "Use trip planner":
-                        chatState.setChatState(TRIP_PLANNER_STATE);
+                        chatState.setChatState(TRIP_PLANNER_STATE_0);
                         DBService.updateChatState(chatState);
                         tripPlannerAction.enterDestinationMessage(message, this);
+                        return;
                     default:
                 }
 
@@ -145,8 +183,8 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
                     }
                 }
 
-                if (chatState.getChatState() == TRIP_PLANNER_STATE && message.hasText()) {
-                    handleWrongMessage(message);
+                if (chatState.getChatState() == TRIP_PLANNER_STATE_0 && message.hasText()) {
+                    String destAddress = message.getText();
                 }
 
             }
