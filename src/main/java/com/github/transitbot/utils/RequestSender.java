@@ -33,6 +33,7 @@ public class RequestSender {
 
         try {
             String fullPath = apiUrl + path;
+            BotLogger.info(LOG, "Full path: " + fullPath);
             response = Unirest.get(fullPath + jsonExtension)
                     .queryString(params)
                     .queryString("api-key", apiKey).asJson();

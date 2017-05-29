@@ -2,18 +2,20 @@ package com.github.transitbot.updatehandlers;
 
 import com.github.transitbot.actions.TripPlannerAction;
 import com.github.transitbot.api.models.BusSchedule;
+import com.github.transitbot.api.models.Coordinates;
 import com.github.transitbot.api.models.Route;
-import com.github.transitbot.api.services.BusScheduleService;
-import com.github.transitbot.api.services.RoutesService;
-import com.github.transitbot.api.services.StopService;
+import com.github.transitbot.api.services.*;
 import com.github.transitbot.api.services.exceptions.StopNotFoundException;
 import com.github.transitbot.commands.HelpCommand;
 import com.github.transitbot.commands.StartCommand;
 import com.github.transitbot.dao.DBService;
 import com.github.transitbot.dao.models.ChatState;
+import com.github.transitbot.dao.models.ChatStateEnum;
+import com.github.transitbot.dao.models.TripData;
 import com.github.transitbot.utils.ConfigReader;
 import com.github.transitbot.utils.Emoji;
 import com.github.transitbot.utils.TemplateUtility;
+import org.json.JSONObject;
 import org.telegram.telegrambots.TelegramApiException;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
@@ -27,10 +29,7 @@ import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.logging.BotLogger;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,54 +43,6 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
      * tag for logs.
      */
     private static final String LOGTAG = "COMMANDSHANDLER";
-    /**
-     * INITIAL_STATE.
-     */
-    private final int INITIAL_STATE = 0;
-
-    /**
-     * BUS_SCHEDULE_STATE.
-     */
-    private final int BUS_SCHEDULE_STATE = 1;
-
-    /**
-     * TRIP_PLANNER_STATE.
-     */
-    private final int TRIP_PLANNER_STATE_0 = 2;
-    /**
-     * TRIP_PLANNER_STATE.
-     */
-    private final int TRIP_PLANNER_STATE_1 = 3;
-
-    /**
-     * TRIP_PLANNER_STATE.
-     */
-    private final int TRIP_PLANNER_STATE_2 = 4;
-    /**
-     * TRIP_PLANNER_STATE.
-     */
-    private final int TRIP_PLANNER_STATE_3 = 5;
-
-    /**
-     * TRIP_PLANNER_STATE.
-     */
-    private final int TRIP_PLANNER_STATE_4 = 6;
-
-    /**
-     * TRIP_PLANNER_STATE.
-     */
-    private final int TRIP_PLANNER_STATE_5 = 7;
-
-    /**
-     * TRIP_PLANNER_STATE.
-     */
-    private final int TRIP_PLANNER_STATE_6 = 8;
-
-    /**
-     * TRIP_PLANNER_STATE.
-     */
-    private final int TRIP_PLANNER_STATE_7 = 9;
-
 
     /**
      * amount of schedules in list.
@@ -123,72 +74,106 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         });
     }
 
+    public Long getChatIdFromUpdate(Update update) {
+        CallbackQuery callbackQuery = update.getCallbackQuery();
+        Message message = update.getMessage();
+        Long chatId = null;
+        if (callbackQuery != null) {
+            chatId = callbackQuery.getMessage().getChatId();
+        }
+        if (message != null) {
+            chatId = message.getChatId();
+        }
+        return chatId;
+    }
+
     @Override
     public void processNonCommandUpdate(Update update) {
         BotLogger.info(LOGTAG, "##### update id: " + update.getUpdateId());
         TripPlannerAction tripPlannerAction = new TripPlannerAction();
         ChatState chatState;
         try {
-            CallbackQuery callbackQuery = update.getCallbackQuery();
-            if (callbackQuery != null) {
-                Long chatId = callbackQuery.getMessage().getChatId();
-                BotLogger.info(LOGTAG, "##### callback chat id: " + chatId);
-                chatState = DBService.getChatStateByChatId(chatId);
-                String callBackData = callbackQuery.getData();
-                String[] callBackDataArray = callBackData.split(":");
-                String callbackButtonCode = callBackDataArray[0];
-                String stopNumber = callBackDataArray[1];
-                switch (callbackButtonCode) {
-                    case "1":
-                        showInfo(callbackQuery, stopNumber);
-                        break;
-                    case "2":
-                        showSchedule(callbackQuery, stopNumber);
-                        break;
-                    default:
-                        chatState.setChatState(INITIAL_STATE);
-                        DBService.updateChatState(chatState);
-                        showInitialKeyboard(callbackQuery);
-                }
-                BotLogger.info(LOGTAG, String.valueOf(chatState));
-            }
+            Long chatId = getChatIdFromUpdate(update);
+            chatState = DBService.getChatStateByChatId(chatId);
             Message message = update.getMessage();
-            if (message != null) {
-                String text = "";
-                if (message.hasText()) {
-                    text = message.getText();
-                }
-                Long chatId = message.getChatId();
-                BotLogger.info(LOGTAG, "##### message chat id: " + chatId);
-                chatState = DBService.getChatStateByChatId(chatId);
-                switch (text) {
-                    case "Get schedule by stop number":
-                        chatState.setChatState(BUS_SCHEDULE_STATE);
-                        DBService.updateChatState(chatState);
-                        enterStopNumberMessage(message);
-                        return;
-                    case "Use trip planner":
-                        chatState.setChatState(TRIP_PLANNER_STATE_0);
-                        DBService.updateChatState(chatState);
-                        tripPlannerAction.enterDestinationMessage(message, this);
-                        return;
-                    default:
-                }
-
-                if (chatState.getChatState() == BUS_SCHEDULE_STATE && message.hasText()) {
+            CallbackQuery callbackQuery = update.getCallbackQuery();
+            switch (chatState.getChatState()) {
+                case INITIAL_STATE:
+                    switch (message.getText()) {
+                        case "Get schedule by stop number":
+                            chatState.setChatState(ChatStateEnum.BUS_SCHEDULE_STATE);
+                            DBService.updateChatState(chatState);
+                            enterStopNumberMessage(message);
+                            return;
+                        case "Use trip planner":
+                            chatState.setChatState(ChatStateEnum.TRIP_PLANNER_STATE_0);
+                            DBService.updateChatState(chatState);
+                            tripPlannerAction.enterDestinationMessage(message, this);
+                            return;
+                        default:
+                    }
+                    showInitialKeyboard(chatId);
+                    break;
+                case BUS_SCHEDULE_STATE:
                     if (validateStopNumber(message.getText())) {
                         showAnswerOnStopNumber(message);
+                        chatState.setChatState(ChatStateEnum.SHOW_BUS_SCHEDULE_STATE);
+                        DBService.updateChatState(chatState);
                     } else {
                         handleWrongMessage(message);
                     }
-                }
-
-                if (chatState.getChatState() == TRIP_PLANNER_STATE_0 && message.hasText()) {
+                    break;
+                case SHOW_BUS_SCHEDULE_STATE:
+                    String callBackData = callbackQuery.getData();
+                    String[] callBackDataArray = callBackData.split("#");
+                    String callbackButtonCode = callBackDataArray[0];
+                    String value = callBackDataArray[1];
+                    if (callbackButtonCode.equals("1")) {
+                        showInfo(callbackQuery, value);
+                        break;
+                    } else if (callbackButtonCode.equals("2")) {
+                        showSchedule(callbackQuery, value);
+                        break;
+                    } else {
+                        chatState.setChatState(ChatStateEnum.INITIAL_STATE);
+                        DBService.updateChatState(chatState);
+                        showInitialKeyboard(chatId);
+                    }
+                    break;
+                case TRIP_PLANNER_STATE_0:
                     String destAddress = message.getText();
-                }
-
+                    GoogleGeoApiService googleGeoApiService = new GoogleGeoApiService();
+                    LocationsService locationsService = new LocationsService();
+                    Coordinates coordinates = googleGeoApiService.getCoordinatesByAddress(destAddress);
+                    Set<JSONObject> addressSet = locationsService.getAllLocations(locationsService.getLocationsByCoordinates(coordinates));
+                    if (addressSet.size() == 0) {
+                        break;
+                    }
+                    InlineKeyboardMarkup markup = createKeyboard(addressSet);
+                    SendMessage sendMessage = new SendMessage();
+                    sendMessage.setReplyMarkup(markup);
+                    sendMessage.setText("Select the nearest place or intersection:");
+                    sendMessage.setChatId(chatId.toString());
+                    sendMessage(sendMessage);
+                    chatState.setChatState(ChatStateEnum.TRIP_PLANNER_STATE_1);
+                    DBService.updateChatState(chatState);
+                    BotLogger.info(LOGTAG, "Chat state: " + chatState);
+                    break;
+                case TRIP_PLANNER_STATE_1:
+                    String data = callbackQuery.getData();
+                    String[] dataArray = data.split("#");
+                    String destinationKey = dataArray[1];
+                    String locationType = dataArray[2];
+                    TripData tripData = new TripData(chatId, destinationKey, locationType, null, null);
+                    DBService.saveTripData(tripData);
+                    chatState.setChatState(ChatStateEnum.TRIP_PLANNER_STATE_2);
+                    DBService.updateChatState(chatState);
+                    break;
+                case TRIP_PLANNER_STATE_2:
+                    TripData tripData1 = DBService.getTripData(chatId);
+                    System.out.println();
+                    break;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -339,11 +324,11 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
     /**
      * creates and show initial keyboard.
      *
-     * @param callbackQuery callbackQuery
+     * @param chatId callbackQuery
      */
-    public void showInitialKeyboard(CallbackQuery callbackQuery) {
+    public void showInitialKeyboard(Long chatId) {
         SendMessage message = new SendMessage();
-        message.setChatId(callbackQuery.getMessage().getChatId().toString());
+        message.setChatId(chatId.toString());
 
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         keyboardMarkup.setOneTimeKeyboad(true);
@@ -387,9 +372,9 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         InlineKeyboardButton infoButton = new InlineKeyboardButton();
         InlineKeyboardButton scheduleButton = new InlineKeyboardButton();
         InlineKeyboardButton backButton = new InlineKeyboardButton();
-        infoButton.setText("Info").setCallbackData("1:" + stopNumber);
-        scheduleButton.setText("Schedules").setCallbackData("2:" + stopNumber);
-        backButton.setText("Back").setCallbackData("3:" + stopNumber);
+        infoButton.setText("Info").setCallbackData("1#" + stopNumber);
+        scheduleButton.setText("Schedules").setCallbackData("2#" + stopNumber);
+        backButton.setText("Back").setCallbackData("3#" + stopNumber);
         internalKeyboard.add(infoButton);
         internalKeyboard.add(scheduleButton);
         internalKeyboard.add(backButton);
@@ -397,4 +382,45 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
         markup.setKeyboard(keyBoard);
         return markup;
     }
+
+    /**
+     * Create inline keyboard.
+     *
+     * @param addresses stopNumber
+     * @return InlineKeyboardMarkup InlineKeyboardMarkup
+     */
+    private InlineKeyboardMarkup createKeyboard(Set<JSONObject> addresses) {
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyBoard = new ArrayList<>();
+        for (JSONObject address : addresses) {
+            List<InlineKeyboardButton> internalKeyboard = new ArrayList<>();
+            InlineKeyboardButton addressButton = new InlineKeyboardButton();
+            String buttonName = "XXX";
+            String locationType = address.getString("type");
+            switch (locationType) {
+                case "monument":
+                    buttonName = address.getString("name");
+                    break;
+                case "address":
+                    buttonName = address.getInt("street-number") + " " + address.getJSONObject("street").getString("name");
+                    break;
+                case "intersection":
+                    buttonName = "'" + address.getJSONObject("cross-street").getString("name") + "' x '" + address.getJSONObject("street").getString("name") + "'";
+                    break;
+            }
+            addressButton.setText(buttonName);
+
+            Object object = address.get("key");
+            if (object instanceof Integer) {
+                addressButton.setCallbackData("key#" + address.getInt("key") + "#" + locationType);
+            } else if (object instanceof String) {
+                addressButton.setCallbackData("key#" + address.getString("key") + "#" + locationType);
+            }
+            internalKeyboard.add(addressButton);
+            keyBoard.add(internalKeyboard);
+        }
+        markup.setKeyboard(keyBoard);
+        return markup;
+    }
+
 }

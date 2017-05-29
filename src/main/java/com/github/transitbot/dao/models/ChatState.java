@@ -18,7 +18,7 @@ public class ChatState {
      * chatState.
      */
     @DatabaseField
-    private int chatState;
+    private ChatStateEnum chatState;
 
     /**
      * default.
@@ -32,7 +32,7 @@ public class ChatState {
      * @param chatId    chatId
      * @param chatState chatState
      */
-    public ChatState(Long chatId, int chatState) {
+    public ChatState(Long chatId, ChatStateEnum chatState) {
         this.chatId = chatId;
         this.chatState = chatState;
     }
@@ -60,7 +60,7 @@ public class ChatState {
      *
      * @return chatState
      */
-    public int getChatState() {
+    public ChatStateEnum getChatState() {
         return chatState;
     }
 
@@ -69,7 +69,7 @@ public class ChatState {
      *
      * @param chatState chatState
      */
-    public void setChatState(int chatState) {
+    public void setChatState(ChatStateEnum chatState) {
         this.chatState = chatState;
     }
 

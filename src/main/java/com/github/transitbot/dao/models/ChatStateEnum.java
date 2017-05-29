@@ -1,0 +1,15 @@
+package com.github.transitbot.dao.models;
+
+public enum ChatStateEnum {
+    INITIAL_STATE,
+    BUS_SCHEDULE_STATE,
+    SHOW_BUS_SCHEDULE_STATE,
+    TRIP_PLANNER_STATE_0,
+    TRIP_PLANNER_STATE_1,
+    TRIP_PLANNER_STATE_2,
+    TRIP_PLANNER_STATE_3,
+    TRIP_PLANNER_STATE_4,
+    TRIP_PLANNER_STATE_5,
+    TRIP_PLANNER_STATE_6,
+    TRIP_PLANNER_STATE_7
+}

@@ -55,4 +55,16 @@ public class LocationsService {
         return locationsWithName;
     }
 
+    public Set<JSONObject> getAllLocations(HttpResponse<JsonNode> locationResponse) {
+        JSONArray rawObject = locationResponse.getBody().getArray();
+        JSONObject locObject = rawObject.getJSONObject(0);
+        JSONArray locationsArray = locObject.getJSONArray("locations");
+        Set<JSONObject> locations = new HashSet<>();
+        for (Object object : locationsArray) {
+            JSONObject locationObject = (JSONObject) object;
+            locations.add(locationObject);
+        }
+        return locations;
+    }
+
 }

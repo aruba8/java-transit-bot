@@ -1,6 +1,7 @@
 package com.github.transitbot.utils;
 
 import com.github.transitbot.dao.models.ChatState;
+import com.github.transitbot.dao.models.TripData;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -35,6 +36,7 @@ public final class DBUtility {
         try {
             connectionSource = new JdbcConnectionSource(databaseUrl, user, password);
             TableUtils.createTableIfNotExists(connectionSource, ChatState.class);
+            TableUtils.createTableIfNotExists(connectionSource, TripData.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
